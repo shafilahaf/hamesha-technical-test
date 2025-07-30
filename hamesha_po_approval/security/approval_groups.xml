@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="0">
+    
+        <record id="group_po_manager" model="res.groups">
+            <field name="name">PO Manager Approver</field>
+        </record>
+        <record id="group_po_dept_head" model="res.groups">
+            <field name="name">PO Department Head</field>
+        </record>
+        <record id="group_po_cfo" model="res.groups">
+            <field name="name">PO CFO Approver</field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

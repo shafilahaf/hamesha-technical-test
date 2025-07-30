@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_template_po_submit" model="mail.template">
+        <field name="name">PO Submit Approval</field>
+        <field name="model_id" ref="purchase.model_purchase_order"/>
+        <field name="email_from">{{ user.email or 'noreply@example.com' }}</field>
+        <field name="email_to">{{ object.create_uid.partner_id.email or '' }}</field>
+        <field name="subject">PO {{ object.name }} Submitted for Approval</field>
+        <field name="body_html" type="html">
+            <div style="font-family: Arial, sans-serif; font-size: 14px; color: #333;">
+                <p>Dear Approver,</p>
+                <p>
+                    The following Purchase Order has been submitted for your approval:
+                </p>
+                <table style="border: 1px solid #ddd; border-collapse: collapse; width: 100%; margin-top: 10px;">
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><strong>PO Number:</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-out="object.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Vendor:</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-out="object.partner_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Total Amount:</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-out="object.amount_total"/> <t t-out="object.currency_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Submitted By:</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <t t-out="object.create_uid.name"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 20px;">
+                    Please login to Odoo to review and approve or reject the PO.
+                </p>
+                <p>Best Regards,</p>
+                <p>
+                    <strong>
+                        <t t-out="object.company_id.name"/>
+                    </strong>
+                </p>
+            </div>
+        </field>
+    </record>
+</odoo>

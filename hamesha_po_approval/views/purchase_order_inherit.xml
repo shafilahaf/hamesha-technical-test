@@ -1,0 +1,35 @@
+<odoo>
+    <record id="view_purchase_order_form_inherit_approval" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.approval</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="po_approval_status" readonly="1"/>
+                <field name="reject_note" readonly="1" invisible="po_approval_status != 'rejected'"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+
+                <button name="btn_submit_approval"
+                        type="object"
+                        string="Submit for Approval"
+                        class="btn btn-primary"
+                        invisible="not (state == 'purchase' and po_approval_status == 'open')"/>
+
+                <button name="btn_approve"
+                        type="object"
+                        string="Approve"
+                        class="btn btn-success"
+                        invisible="not (state == 'purchase' and po_approval_status in ['pending_approval_manager', 'pending_approval_dept_head', 'pending_approval_cfo'])"/>
+
+                <button name="btn_reject"
+                        type="object"
+                        string="Reject"
+                        class="btn btn-danger"
+                        invisible="not (state == 'purchase' and po_approval_status in ['pending_approval_manager', 'pending_approval_dept_head', 'pending_approval_cfo'])"/>
+
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

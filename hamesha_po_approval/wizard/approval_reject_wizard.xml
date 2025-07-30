@@ -1,0 +1,24 @@
+<odoo>
+    <record id="view_reject_po_wizard_form" model="ir.ui.view">
+        <field name="name">reject.po.wizard.form</field>
+        <field name="model">reject.po.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reject PO">
+                <group>
+                    <field name="rejection_reason"/>
+                </group>
+                <footer>
+                    <button string="Reject" type="object" name="action_reject" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_reject_po_wizard" model="ir.actions.act_window">
+        <field name="name">Reject PO</field>
+        <field name="res_model">reject.po.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
